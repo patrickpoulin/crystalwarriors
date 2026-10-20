@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Crystal Warriors</title>
+  <style>
+    :root {
+      /* the screen is the largest 160x144 (10:9) box that fits the window;
+         --u is one Game Gear pixel at that size */
+      --screen-w: min(100vw, 100dvh * 10 / 9);
+      --u: calc(var(--screen-w) / 160);
+      --accent: #4fa3ff;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      background: #000;
+      color: #ddd;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .screen {
+      width: var(--screen-w);
+      height: calc(var(--screen-w) * 0.9);
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+    #game { width: 100%; height: 100%; }
+
+    /* ---------- title card ---------- */
+    .title {
+      position: absolute; inset: 0; z-index: 5;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(6 * var(--u));
+      background:
+        radial-gradient(ellipse at 50% 40%, rgba(79,163,255,.25), transparent 60%),
+        linear-gradient(180deg, #0d1430, #05070f);
+      cursor: pointer;
+      transition: opacity .5s;
+    }
+    .title.gone { opacity: 0; pointer-events: none; }
+    .title .crystal {
+      width: calc(14 * var(--u)); height: calc(22 * var(--u));
+      background: linear-gradient(135deg, #bfe3ff, #4fa3ff 45%, #1a4fb0);
+      clip-path: polygon(50% 0, 100% 35%, 50% 100%, 0 35%);
+      filter: drop-shadow(0 0 calc(4 * var(--u)) rgba(79,163,255,.8));
+      animation: float 3s ease-in-out infinite;
+    }
+    .title h1 {
+      margin: 0; font-size: calc(13 * var(--u)); letter-spacing: .08em; color: #e9f3ff;
+      text-shadow: 0 0 calc(3 * var(--u)) rgba(79,163,255,.9), 0 2px 0 #10204a;
+      font-family: Georgia, "Times New Roman", serif; font-style: italic;
+    }
+    .title p {
+      margin: 0; font-size: calc(5 * var(--u)); letter-spacing: .3em; color: #9fc3ff;
+      animation: blink 1.4s steps(2, start) infinite;
+    }
+    .title .hint {
+      position: absolute; bottom: calc(5 * var(--u)); left: 0; right: 0; text-align: center;
+      font-size: max(11px, calc(3.2 * var(--u))); letter-spacing: .04em; color: #6f7fa8; animation: none;
+      padding: 0 8px;
+    }
+    .version {
+      display: none; margin-top: calc(4 * var(--u));
+      border: 1px solid rgba(159,195,255,.35); border-radius: 999px; overflow: hidden;
+    }
+    .version.available { display: flex; }
+    .version button {
+      border: 0; background: transparent; color: #9fc3ff; cursor: pointer;
+      font: 600 calc(3.6 * var(--u)) "Segoe UI", system-ui, sans-serif; letter-spacing: .15em;
+      padding: calc(1.4 * var(--u)) calc(4 * var(--u));
+    }
+    .version button[aria-pressed="true"] { background: #4fa3ff; color: #05070f; }
+    @keyframes float { 50% { transform: translateY(calc(-3 * var(--u))); } }
+    @keyframes blink { to { visibility: hidden; } }
+
+    /* ---------- full-screen button ---------- */
+    .fs {
+      position: fixed; top: 12px; right: 12px; z-index: 10;
+      width: 40px; height: 40px; border-radius: 10px; border: 0; cursor: pointer;
+      background: rgba(255,255,255,.08); color: #c9c3d8;
+      display: grid; place-items: center;
+      opacity: .35; transition: background .2s, color .2s, opacity .3s;
+    }
+    .fs:hover { background: rgba(255,255,255,.16); color: #fff; opacity: 1; }
+    .fs svg { width: 20px; height: 20px; }
+    .fs .exit { display: none; }
+    :fullscreen .fs .enter { display: none; }
+    :fullscreen .fs .exit { display: block; }
+  </style>
+</head>
+<body>
+  <div class="screen">
+    <div id="game"></div>
+    <div class="title" id="title">
+      <div class="crystal"></div>
+      <h1>Crystal Warriors</h1>
+      <p>PRESS START</p>
+      <div class="version" id="version" role="group" aria-label="Game version">
+        <button data-rom="original">ORIGINAL</button>
+        <button data-rom="mod">MODDED</button>
+      </div>
+      <p class="hint">Click to power on · gear icon for save states &amp; filters · F for full screen</p>
+    </div>
+  </div>
+  <button class="fs" id="fs" title="Full screen (F)" aria-label="Toggle full screen">
+    <svg class="enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+    <svg class="exit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>
+  </button>
+
+  <script>
+    // ---- full screen ----
+    const root = document.documentElement;
+    const canFullscreen = !!(root.requestFullscreen || root.webkitRequestFullscreen);
+    function toggleFullscreen() {
+      if (document.fullscreenElement || document.webkitFullscreenElement) {
+        (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+      } else {
+        (root.requestFullscreen || root.webkitRequestFullscreen).call(root);
+      }
+    }
+    const fsBtn = document.getElementById('fs');
+    if (!canFullscreen) fsBtn.hidden = true;   // e.g. iPhone Safari
+    fsBtn.addEventListener('click', () => { toggleFullscreen(); fsBtn.blur(); });
+    addEventListener('keydown', e => {
+      if ((e.key === 'f' || e.key === 'F') && !e.ctrlKey && !e.metaKey && !e.altKey && canFullscreen) toggleFullscreen();
+    }, true);
+
+    // ---- emulator config (loaded when the player presses start) ----
+    EJS_player = '#game';
+    EJS_core = 'segaGG';
+    EJS_gameUrl = 'crystalwarrior.gg';      // swapped for the modded copy in boot() if chosen
+    EJS_gameName = 'Crystal Warriors';      // same name for both versions, so saves carry over
+    EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
+    EJS_startOnLoaded = true;
+    EJS_color = '#4fa3ff';
+    EJS_backgroundColor = '#000';
+    EJS_defaultOptions = {
+      'shader': '2xScaleHQ.glslp',
+      'genesis_plus_gx_aspect_ratio': 'Uncorrected',      // square pixels: fills the 160x144 screen exactly
+      'genesis_plus_gx_no_sprite_limit': 'enabled'        // removes hardware sprite flicker
+    };
+
+    let booted = false;
+    function boot() {
+      if (booted) return;
+      booted = true;
+      if (romChoice === 'mod' && modAvailable) {
+        // cache-buster so a fresh build is always picked up
+        EJS_gameUrl = 'crystalwarrior-mod.gg?v=' + Date.now();
+      }
+      document.getElementById('title').classList.add('gone');
+      const s = document.createElement('script');
+      s.src = EJS_pathtodata + 'loader.js';
+      document.body.appendChild(s);
+    }
+    document.getElementById('title').addEventListener('click', boot);
+
+    // ---- original / modded switch (only shown once tools/cwtext.py build has made a mod) ----
+    let romChoice = 'original', modAvailable = false;
+    try { romChoice = localStorage.getItem('cw-rom') || 'original'; } catch (e) {}
+    const versionEl = document.getElementById('version');
+    function showChoice() {
+      versionEl.querySelectorAll('button').forEach(b =>
+        b.setAttribute('aria-pressed', String(b.dataset.rom === romChoice)));
+    }
+    versionEl.addEventListener('click', e => {
+      e.stopPropagation();                     // picking a version shouldn't power on
+      const b = e.target.closest('button');
+      if (!b) return;
+      romChoice = b.dataset.rom;
+      try { localStorage.setItem('cw-rom', romChoice); } catch (err) {}
+      showChoice();
+    });
+    fetch('crystalwarrior-mod.gg', { method: 'HEAD', cache: 'no-store' })
+      .then(r => { if (r.ok) { modAvailable = true; versionEl.classList.add('available'); showChoice(); } })
+      .catch(() => {});
+  </script>
+</body>
+</html>

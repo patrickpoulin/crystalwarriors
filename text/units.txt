@@ -1,0 +1,173 @@
+# Crystal Warriors - units and class stats
+#
+# Edit, then run:   python tools/cwtext.py build
+#
+# UNITS: one line per unit:  id  NAME  CLASS  ELEMENT
+#  - Names: 1 to 5 characters (capitals, numbers, ! ' ( ) , . ? : ").
+#  - CLASS is shown for reference only and can't be changed yet.
+#  - Elements: EARTH FIRE WIND WATER. (Changing one updates the status screen;
+#    whether battles use the new element hasn't been tested yet.)
+#  - Bosses (34-38) and monsters (39-54): names and elements only - their stats
+#    aren't mapped yet.
+#  - Ids 0-16 are your army. 17-33 are the opposing army (2-player mode, led by CHAM).
+#
+# CLASS STATS: HP MP AP DP LK at each level, shared by every unit of that class.
+#  - Values 0-255. A level-up gives the difference between two rows.
+#  - Only levels 1-8 are listed; level 9 isn't fully understood yet.
+
+# ===================== UNITS =====================
+# id  NAME   CLASS     ELEMENT
+
+# --- your army ---
+   0  MIKE   PRINCESS  EARTH
+   1  PAT!!  LORD      EARTH
+   2  BORM   FIGHTER   FIRE
+   3  FLARE  FIGHTER   FIRE
+   4  ?????  FIGHTER   FIRE
+   5  ZEPHI  RANGER    WIND
+   6  RATT   RANGER    WIND
+   7  TYRIS  RANGER    WIND
+   8  ?????  RANGER    WIND
+   9  PERCY  LORD      WATER
+  10  ?????  FIGHTER   WATER
+  11  SOPHI  FIGHTER   WATER
+  12  DAYNE  FIGHTER   WATER
+  13  ORYON  HEALER    EARTH
+  14  BOB   HEALER    EARTH
+  15  ADAM  MAGE      EARTH
+  16  ROMI   MAGE      EARTH
+
+# --- opposing army ---
+  17  CHAM   PRINCESS  EARTH
+  18  MORBI  FIGHTER   FIRE
+  19  BRAST  FIGHTER   FIRE
+  20  RUS    LORD      FIRE
+  21  ?????  FIGHTER   FIRE
+  22  ?????  RANGER    WIND
+  23  MADD   RANGER    WIND
+  24  AYA    RANGER    WIND
+  25  KEM    RANGER    WIND
+  26  WERM   FIGHTER   WATER
+  27  SHAD   FIGHTER   WATER
+  28  ORKUS  LORD      WATER
+  29  ?????  FIGHTER   WATER
+  30  BANE   HEALER    EARTH
+  31  NADAR  HEALER    EARTH
+  32  PYRO   MAGE      EARTH
+  33  SETHE  MAGE      EARTH
+
+# --- Jyn bosses ---
+  34  JYN    EMPEROR   EARTH
+  35  ARIUM  WARLORD   FIRE
+  36  RAGAR  WARLORD   WIND
+  37  DAMUN  WARLORD   WATER
+  38  GRYM   WIZARD    EARTH
+
+# --- monsters ---
+  39  SKORP  MONSTER   EARTH
+  40  WURM   MONSTER   EARTH
+  41  GOLEM  MONSTER   EARTH
+  42  TUT    MONSTER   EARTH
+  43  AQUAN  MONSTER   WATER
+  44  SIREN  MONSTER   WATER
+  45  HYDRA  MONSTER   WATER
+  46  TENTA  MONSTER   WATER
+  47  WISP   MONSTER   FIRE
+  48  REPTI  MONSTER   FIRE
+  49  EVIUS  MONSTER   FIRE
+  50  FENIX  MONSTER   FIRE
+  51  HARPY  MONSTER   WIND
+  52  GRIVN  MONSTER   WIND
+  53  CYKLO  MONSTER   WIND
+  54  GENI   MONSTER   WIND
+
+# ===================== MOVEMENT (SP) =====================
+# SP = how far a unit can move each turn. The game sets it by group, not per unit,
+# so each number below applies to everyone in that group. Values 1-15.
+
+[MOVEMENT]
+  PRINCESSES_HEALERS_MAGES    6    # units 0, 13-16 (and 17, 30-33)
+  LORDS_FIGHTERS_RANGERS      5    # units 1-12 (and 18-29)
+  JYN_AND_WARLORDS            5    # units 34-37
+  GRYM_AND_MONSTERS           6    # units 38-54
+
+# ===================== STARTING SPELLS =====================
+# Spells each unit knows when you start a NEW ADVENTURE (saved books keep theirs).
+# Up to 4 per unit, or NONE. The name column is only a reminder.
+# Spells: SCAN HEAL LIFE PEACE DARK SLEEP CHANT DRAIN BOOST COLD FROST FIRE BLAZE FLASH BOLT
+
+[STARTING SPELLS]
+   0  MIKE   HEAL SCAN
+  12  DAYNE  NONE
+   1  PAT!!  NONE
+   6  RATT   NONE
+  15  ADAM   SCAN FLASH
+  14  BOB    HEAL SCAN
+
+# ===================== CLASS STATS =====================
+
+[STATS PRINCESS]
+# LV   HP  MP  AP  DP  LK
+   1   32  26  18  10  10
+   2   35  27  21  10  10
+   3   38  28  25  11  11
+   4   41  30  30  12  11
+   5   45  32  35  14  13
+   6   50  35  38  16  13
+   7   55  38  44  19  13
+   8   60  42  50  22  15
+
+[STATS LORD]
+# LV   HP  MP  AP  DP  LK
+   1   38   0  16  10  20
+   2   42   0  18  11  20
+   3   46   0  20  12  20
+   4   50   0  24  14  20
+   5   56   0  28  16  30
+   6   61   0  32  18  30
+   7   66   0  36  20  30
+   8   71   0  40  22  50
+
+[STATS FIGHTER]
+# LV   HP  MP  AP  DP  LK
+   1   36   0  16   8   8
+   2   40   0  18   9   8
+   3   44   0  21  10   9
+   4   48   0  24  11   9
+   5   53   0  28  13  10
+   6   58   0  33  15  10
+   7   63   0  38  17  10
+   8   68   0  43  19  12
+
+[STATS RANGER]
+# LV   HP  MP  AP  DP  LK
+   1   34   0  18   6  10
+   2   37   0  21   8  10
+   3   40   0  25   9  12
+   4   43   0  29  10  12
+   5   48   0  34  11  13
+   6   53   0  39  12  13
+   7   58   0  44  13  13
+   8   63   0  49  14  14
+
+[STATS MAGE]
+# LV   HP  MP  AP  DP  LK
+   1   25  64   1   5  12
+   2   27  64   1   6  12
+   3   30  66   1   8  13
+   4   33  66   1   9  13
+   5   37  68   2  11  15
+   6   42  68   2  13  15
+   7   47  71   2  14  15
+   8   53  71   2  16  16
+
+[STATS HEALER]
+# LV   HP  MP  AP  DP  LK
+   1   30  65  10   7   8
+   2   31  65  11   8   8
+   3   32  66  12  10  10
+   4   34  66  13  11  10
+   5   36  68  14  12  11
+   6   39  68  15  13  11
+   7   42  73  16  15  11
+   8   46  73  17  17  13

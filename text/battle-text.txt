@@ -1,0 +1,263 @@
+# Crystal Warriors - battle text
+#
+# Edit the lines below, then run:   python tools/cwtext.py build
+# That writes crystalwarrior-mod.gg (your original game file is never changed).
+#
+# RULES
+#  - Capital letters, numbers, space and  ! ' ( ) , . ? : "  only. (Lowercase is
+#    turned into capitals - the game has no lowercase letters.)
+#  - A message can be shorter than the original but not longer. The [max N]
+#    tag is the limit in bytes: each letter is 1, each {CODE} is 1.
+#  - Codes the game fills in or acts on:
+#      {NAME}  unit name      {NUM}  a number      {SPELL}  spell name
+#      {NL}    new line       {WAIT} wait for the button before continuing
+#      {35} etc. are symbols whose meaning isn't known yet - keep them.
+#  - The text box fits about 14 characters per line, 2 lines per message.
+#  - Lines starting with # are notes and are ignored. "was:" shows the original.
+
+
+# ===================== BATTLE MESSAGES =====================
+# The after-battle summary is near the end (THE BATTLE IS UNRESOLVED onward).
+
+[190C8] max 11
+#   was: {NAME}{NL}ATTACKS!{WAIT}
+{NAME}{NL}ATTACKS!{WAIT}
+
+[190D4] max 27
+#   was: DMG INFLICTED:{NL}{NUM} HIT PT(S){WAIT}
+DMG INFLICTED:{NL}{NUM} HIT PT(S){WAIT}
+
+[190F0] max 19
+#   was: THE ATTACK{NL}MISSES!{WAIT}
+THE ATTACK{NL}MISSES!{WAIT}
+
+[19104] max 16
+#   was: A CRITICAL{NL}HIT!{WAIT}
+A CRITICAL{NL}HIT!{WAIT}
+
+[19115] max 26
+#   was: DMG SUFFERED:{NL}{NUM} HIT PT(S){WAIT}
+DMG SUFFERED:{NL}{NUM} HIT PT(S){WAIT}
+
+[19130] max 11
+#   was: NO DAMAGE!{WAIT}
+NO DAMAGE!{WAIT}
+
+[1913C] max 19
+#   was: {NAME} TRIES{NL}TO ESCAPE.{WAIT}
+{NAME} TRIES{NL}TO ESCAPE.{WAIT}
+
+[19150] max 19
+#   was: THE ATTEMPT{NL}FAILS!{WAIT}
+THE ATTEMPT{NL}FAILS!{WAIT}
+
+[19164] max 27
+#   was: THE ATTEMPT IS{NL}SUCCESSFUL!{WAIT}
+THE ATTEMPT IS{NL}SUCCESSFUL!{WAIT}
+
+[19180] max 24
+#   was: THE ENEMY{NL}TRIES TO RUN!{WAIT}
+THE ENEMY{NL}TRIES TO RUN!{WAIT}
+
+[19199] max 23
+#   was: "UNTIL ANOTHER{NL}DAY..."{WAIT}
+"UNTIL ANOTHER{NL}DAY..."{WAIT}
+
+[191B1] max 10
+#   was: "COWARD!"{WAIT}
+"COWARD!"{WAIT}
+
+[191BC] max 21
+#   was: {NAME} CAN'T{NL}CAST SPELLS!{WAIT}
+{NAME} CAN'T{NL}CAST SPELLS!{WAIT}
+
+[191D2] max 19
+#   was: {NAME} CASTS{NL}A {SPELL} SPELL!{WAIT}
+{NAME} CASTS{NL}A {SPELL} SPELL!{WAIT}
+
+[191E6] max 27
+#   was: CAN'T BE USED{NL}FOR BATTLES.{WAIT}
+CAN'T BE USED{NL}FOR BATTLES.{WAIT}
+
+[19202] max 25
+#   was: POWER DRAIN:{NL}{NUM} HIT PT(S){WAIT}
+POWER DRAIN:{NL}{NUM} HIT PT(S){WAIT}
+
+[1921C] max 19
+#   was: A {SPELL} SPELL{NL}IS CAST!{WAIT}
+A {SPELL} SPELL{NL}IS CAST!{WAIT}
+
+[19230] max 11
+#   was: NO EFFECT!{WAIT}
+NO EFFECT!{WAIT}
+
+[1923C] max 17
+#   was: ENEMY ENGAGED:{NL}{NAME}{WAIT}
+ENEMY ENGAGED:{NL}{NAME}{WAIT}
+
+[1924E] max 22
+#   was: RECOVERY:{NL}{NUM} HIT PT(S){WAIT}
+RECOVERY:{NL}{NUM} HIT PT(S){WAIT}
+
+[19265] max 24
+#   was: {NAME}'S SPELLS{NL}ARE BLOCKED!{WAIT}
+{NAME}'S SPELLS{NL}ARE BLOCKED!{WAIT}
+
+[1927E] max 19
+#   was: DARKNESS{NL}BLINDS {NAME}!{WAIT}
+DARKNESS{NL}BLINDS {NAME}!{WAIT}
+
+[19292] max 21
+#   was: MP RECOVERY:{NL}{NUM} PT(S){WAIT}
+MP RECOVERY:{NL}{NUM} PT(S){WAIT}
+
+[192A8] max 22
+#   was: {NAME} PULSES:{NL}WITH POWER!{WAIT}
+{NAME} PULSES:{NL}WITH POWER!{WAIT}
+
+[192BF] max 25
+#   was: NOT ENOUGH{NL}MAGIC POINTS!{WAIT}
+NOT ENOUGH{NL}MAGIC POINTS!{WAIT}
+
+[192D9] max 24
+#   was: {NAME}'S SPELLS{NL}ARE BLOCKED!{WAIT}
+{NAME}'S SPELLS{NL}ARE BLOCKED!{WAIT}
+
+[192F2] max 21
+#   was: {NAME} FALLS{NL}FAST ASLEEP!{WAIT}
+{NAME} FALLS{NL}FAST ASLEEP!{WAIT}
+
+[19308] max 15
+#   was: {NAME} IS{NL}SLEEPING!{WAIT}
+{NAME} IS{NL}SLEEPING!{WAIT}
+
+[19318] max 29
+#   was: YOU'RE EXPOSED{NL}TO THE ENEMY!{WAIT}
+YOU'RE EXPOSED{NL}TO THE ENEMY!{WAIT}
+
+[19336] max 26
+#   was: YOU DON'T HAVE{NL}A MONSTER!{WAIT}
+YOU DON'T HAVE{NL}A MONSTER!{WAIT}
+
+[19351] max 21
+#   was: {NAME} TAMED{NL}THE MONSTER!{WAIT}
+{NAME} TAMED{NL}THE MONSTER!{WAIT}
+
+[19367] max 30
+#   was: YOU'VE GOT TOO{NL}MANY MONSTERS!{WAIT}
+YOU'VE GOT TOO{NL}MANY MONSTERS!{WAIT}
+
+[19386] max 23
+#   was: {NAME} SUMMONS{NL}THE MONSTER!{WAIT}
+{NAME} SUMMONS{NL}THE MONSTER!{WAIT}
+
+[1939E] max 18
+#   was: THE MONSTER{NL}RUNS!{WAIT}
+THE MONSTER{NL}RUNS!{WAIT}
+
+[193B1] max 22
+#   was: THE MONSTER{NL}IS SLAIN!{WAIT}
+THE MONSTER{NL}IS SLAIN!{WAIT}
+
+[193C8] max 23
+#   was: {NAME} CAN'T{NL}USE A MONSTER!{WAIT}
+{NAME} CAN'T{NL}USE A MONSTER!{WAIT}
+
+[193E0] max 26
+#   was: THE BATTLE IS{NL}UNRESOLVED.{WAIT}
+THE BATTLE IS{NL}UNRESOLVED.{WAIT}
+
+[193FB] max 17
+#   was: {NAME} IS{NL}VICTORIOUS!{WAIT}
+{NAME} IS{NL}VICTORIOUS!{WAIT}
+
+[1940D] max 9
+#   was: {NAME} GAINS:{WAIT}
+{NAME} GAINS:{WAIT}
+
+[19417] max 7
+#   was: {NUM} EXP {WAIT}
+{NUM} EXP {WAIT}
+
+[1941F] max 7
+#   was: AND {35}{NUM}{WAIT}
+AND {35}{NUM}{WAIT}
+
+[19427] max 15
+#   was: {NAME} IS{NL}DEFEATED!{WAIT}
+{NAME} IS{NL}DEFEATED!{WAIT}
+
+[19437] max 17
+#   was: {NAME} GAINS{NL}A LEVEL!{WAIT}
+{NAME} GAINS{NL}A LEVEL!{WAIT}
+
+[19449] max 19
+#   was: HP GAINED:{NL}{NUM} PT(S){WAIT}
+HP GAINED:{NL}{NUM} PT(S){WAIT}
+
+[1945D] max 19
+#   was: MP GAINED:{NL}{NUM} PT(S){WAIT}
+MP GAINED:{NL}{NUM} PT(S){WAIT}
+
+[19471] max 19
+#   was: AP GAINED:{NL}{NUM} PT(S){WAIT}
+AP GAINED:{NL}{NUM} PT(S){WAIT}
+
+[19485] max 19
+#   was: DP GAINED:{NL}{NUM} PT(S){WAIT}
+DP GAINED:{NL}{NUM} PT(S){WAIT}
+
+[19499] max 19
+#   was: LK GAINED:{NL}{NUM} PT(S){WAIT}
+LK GAINED:{NL}{NUM} PT(S){WAIT}
+
+[194AD] max 5
+#   was: WAIT!
+WAIT!
+
+[194B3] max 14
+#   was: {NAME}{NL}RETALIATES!{WAIT}
+{NAME}{NL}RETALIATES!{WAIT}
+
+[194C2] max 21
+#   was: {NAME}FAILS{NL}TO RETALIATE.{WAIT}
+{NAME}FAILS{NL}TO RETALIATE.{WAIT}
+
+# ===================== END-OF-BATTLE VERDICTS =====================
+# Each verdict is a fixed box: type inside the | | bars, rows can't get wider.
+
+[VERDICT 0] 10 wide x 3 rows   (stunning victory)
+|A STUNNING|
+|          |
+|VICTORY!  |
+
+[VERDICT 1] 8 wide x 1 rows   (won)
+|YOU WON!|
+
+[VERDICT 2] 10 wide x 3 rows   (barely won)
+|YOU BARELY|
+|          |
+|WON.      |
+
+[VERDICT 3] 14 wide x 3 rows   (miracle win)
+|IT'S A MIRACLE|
+|              |
+|THAT YOU WON! |
+
+[VERDICT 4] 12 wide x 3 rows   (slaughtered)
+|YOU'VE BEEN |
+|            |
+|SLAUGHTERED!|
+
+[VERDICT 5] 9 wide x 1 rows   (lost)
+|YOU LOST!|
+
+[VERDICT 6] 10 wide x 3 rows   (almost won)
+|YOU ALMOST|
+|          |
+|WON.      |
+
+[VERDICT 7] 13 wide x 3 rows   (how could you lose)
+|HOW COULD YOU|
+|             |
+|LOSE?!       |

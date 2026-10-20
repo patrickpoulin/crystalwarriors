@@ -1,0 +1,51 @@
+# Crystal Warriors - opening story
+#
+# Edit the lines below, then run:   python tools/cwtext.py build
+#
+# Each |...| row is one line on screen. The story box shows 8 rows and scrolls,
+# so you can use as many rows as you like, but:
+#  - a row can be at most 14 characters (the width of the bars below)
+#  - the whole passage can't be longer than the original: [max N] counts every
+#    character plus 1 for each row break
+#  - a row with nothing between the bars is a blank line (paragraph break)
+#  - Capital letters, numbers, space and  ! ' ( ) , . ? : "  only
+#  - Lines starting with # are notes and are ignored.
+
+[STORY 0] max 629   (shown when you start a NEW ADVENTURE)
+|Patrick has   |
+|made edits to |
+|this story.   |
+|He removed it.|
+|              |
+|Turn based    |
+|Get into      |
+|their castle  |
+|first. Or kill|
+|all of them.  |
+|Kill is good  |
+|Get XP and    |
+|Cash for weps |
+|              |
+|Princess can't|
+|die or GG     |
+
+[STORY 1] max 213   (the minstrel's short tale (used by the other story slots))
+|MINSTRELS SING|
+|OF AN AGE LONG|
+|PAST.  OF FOUR|
+|MAGIC CRYSTALS|
+|AND A LAND    |
+|THAT PROSPERED|
+|UNDER THE RULE|
+|OF A GENTLE   |
+|QUEEN.        |
+|              |
+|THE SONGS MAY |
+|BE FORGOTTEN, |
+|BUT THE TALE  |
+|REMAINS THE   |
+|SAME.         |
+|              |
+|SUCH IS THE   |
+|STUFF OF      |
+|LEGENDS....   |
